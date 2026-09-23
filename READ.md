@@ -1,2 +1,2 @@
 # hi this is my practice session on git 
-# sai vardha practicing
+# sai vardha practicing on hp laptop 
