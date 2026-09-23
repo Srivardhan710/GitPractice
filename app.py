@@ -1,5 +1,5 @@
 """
-DevPulse - Interactive Developer Hub & Web Dashboard
+DevPulse - Interactive Developer Hub & Web Dashboard (Light Theme)
 Single-file Flask Application containing back-end endpoints and inline dynamic UI.
 
 Usage:
@@ -47,18 +47,19 @@ HTML_TEMPLATE = """
     
     <style>
         :root {
-            --bg-primary: #090d16;
-            --bg-secondary: #111827;
-            --bg-card: rgba(17, 24, 39, 0.7);
-            --bg-card-hover: rgba(31, 41, 55, 0.8);
-            --border-color: rgba(255, 255, 255, 0.08);
-            --accent-primary: #6366f1;
-            --accent-glow: rgba(99, 102, 241, 0.35);
-            --accent-secondary: #a855f7;
-            --accent-cyan: #06b6d4;
-            --accent-emerald: #10b981;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-card: rgba(255, 255, 255, 0.85);
+            --bg-card-hover: rgba(255, 255, 255, 0.98);
+            --border-color: rgba(226, 232, 240, 0.8);
+            --shadow-color: rgba(148, 163, 184, 0.12);
+            --accent-primary: #4f46e5;
+            --accent-glow: rgba(79, 70, 229, 0.2);
+            --accent-secondary: #7c3aed;
+            --accent-cyan: #0284c7;
+            --accent-emerald: #059669;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
             --font-main: 'Inter', sans-serif;
             --font-code: 'Fira Code', monospace;
         }
@@ -78,7 +79,7 @@ HTML_TEMPLATE = """
             line-height: 1.6;
         }
 
-        /* Ambient Background Glow */
+        /* Ambient Background Light Glow */
         .ambient-bg {
             position: fixed;
             top: 0;
@@ -93,8 +94,8 @@ HTML_TEMPLATE = """
         .glow-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.25;
+            filter: blur(100px);
+            opacity: 0.45;
             animation: floatOrb 18s ease-in-out infinite alternate;
         }
 
@@ -103,7 +104,7 @@ HTML_TEMPLATE = """
             left: -10%;
             width: 50vw;
             height: 50vw;
-            background: radial-gradient(circle, var(--accent-primary), transparent 70%);
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.25), transparent 70%);
         }
 
         .orb-2 {
@@ -111,7 +112,7 @@ HTML_TEMPLATE = """
             right: -10%;
             width: 60vw;
             height: 60vw;
-            background: radial-gradient(circle, var(--accent-secondary), transparent 70%);
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.2), transparent 70%);
         }
 
         @keyframes floatOrb {
@@ -138,7 +139,7 @@ HTML_TEMPLATE = """
             border: 1px solid var(--border-color);
             border-radius: 16px;
             margin-bottom: 2.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px var(--shadow-color);
         }
 
         .logo-group {
@@ -158,14 +159,14 @@ HTML_TEMPLATE = """
             font-weight: 800;
             font-size: 1.25rem;
             color: #fff;
-            box-shadow: 0 0 20px var(--accent-glow);
+            box-shadow: 0 4px 14px var(--accent-glow);
         }
 
         .logo-text {
             font-size: 1.35rem;
             font-weight: 700;
             letter-spacing: -0.02em;
-            background: linear-gradient(to right, #fff, #9ca3af);
+            background: linear-gradient(to right, #0f172a, #475569);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -176,7 +177,7 @@ HTML_TEMPLATE = """
             gap: 0.5rem;
             font-size: 0.875rem;
             color: var(--text-muted);
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(241, 245, 249, 0.8);
             padding: 0.4rem 0.9rem;
             border-radius: 20px;
             border: 1px solid var(--border-color);
@@ -207,9 +208,9 @@ HTML_TEMPLATE = """
             display: inline-block;
             padding: 0.35rem 1rem;
             border-radius: 30px;
-            background: rgba(99, 102, 241, 0.12);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            color: #818cf8;
+            background: rgba(79, 70, 229, 0.08);
+            border: 1px solid rgba(79, 70, 229, 0.25);
+            color: var(--accent-primary);
             font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 1.25rem;
@@ -223,10 +224,11 @@ HTML_TEMPLATE = """
             line-height: 1.15;
             margin-bottom: 1.25rem;
             letter-spacing: -0.03em;
+            color: #0f172a;
         }
 
         .gradient-text {
-            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #06b6d4 100%);
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #0284c7 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -256,12 +258,13 @@ HTML_TEMPLATE = """
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 15px var(--shadow-color);
         }
 
         .metric-card:hover {
             transform: translateY(-4px);
-            border-color: rgba(99, 102, 241, 0.4);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            border-color: rgba(79, 70, 229, 0.4);
+            box-shadow: 0 12px 30px rgba(79, 70, 229, 0.15);
         }
 
         .metric-label {
@@ -274,7 +277,7 @@ HTML_TEMPLATE = """
         .metric-value {
             font-size: 2rem;
             font-weight: 700;
-            color: #fff;
+            color: #0f172a;
             letter-spacing: -0.02em;
         }
 
@@ -285,6 +288,7 @@ HTML_TEMPLATE = """
             display: flex;
             align-items: center;
             gap: 0.25rem;
+            font-weight: 600;
         }
 
         /* Section Layout */
@@ -310,7 +314,7 @@ HTML_TEMPLATE = """
             border-radius: 20px;
             padding: 1.75rem;
             backdrop-filter: blur(14px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 8px 24px var(--shadow-color);
         }
 
         .card-header {
@@ -325,6 +329,7 @@ HTML_TEMPLATE = """
         .card-title {
             font-size: 1.25rem;
             font-weight: 700;
+            color: #0f172a;
             display: flex;
             align-items: center;
             gap: 0.6rem;
@@ -343,20 +348,25 @@ HTML_TEMPLATE = """
 
         .input-field {
             flex: 1;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border-color);
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
             border-radius: 12px;
             padding: 0.75rem 1rem;
-            color: #fff;
+            color: #0f172a;
             font-family: var(--font-main);
             font-size: 0.95rem;
             outline: none;
-            transition: border-color 0.2s;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .input-field::placeholder {
+            color: #94a3b8;
         }
 
         .input-field:focus {
             border-color: var(--accent-primary);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+            background: #ffffff;
         }
 
         .btn {
@@ -375,7 +385,7 @@ HTML_TEMPLATE = """
         }
 
         .btn:hover {
-            opacity: 0.92;
+            opacity: 0.95;
             transform: translateY(-1px);
             box-shadow: 0 4px 15px var(--accent-glow);
         }
@@ -394,16 +404,18 @@ HTML_TEMPLATE = """
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(255, 255, 255, 0.03);
+            background: #ffffff;
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 0.85rem 1rem;
             transition: all 0.2s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
         }
 
         .task-item:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.15);
+            background: #f8fafc;
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .task-info {
@@ -414,16 +426,16 @@ HTML_TEMPLATE = """
 
         .badge {
             font-size: 0.75rem;
-            padding: 0.2rem 0.6rem;
+            padding: 0.25rem 0.65rem;
             border-radius: 8px;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
         }
 
-        .badge-backend { background: rgba(99, 102, 241, 0.2); color: #818cf8; }
-        .badge-frontend { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
-        .badge-analytics { background: rgba(6, 182, 212, 0.2); color: #22d3ee; }
-        .badge-devops { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+        .badge-backend { background: #e0e7ff; color: #3730a3; }
+        .badge-frontend { background: #f3e8ff; color: #6b21a8; }
+        .badge-analytics { background: #e0f2fe; color: #075985; }
+        .badge-devops { background: #fef3c7; color: #92400e; }
 
         .btn-delete {
             background: transparent;
@@ -433,12 +445,12 @@ HTML_TEMPLATE = """
             padding: 0.3rem 0.5rem;
             border-radius: 6px;
             opacity: 0.7;
-            transition: opacity 0.2s;
+            transition: opacity 0.2s, background 0.2s;
         }
 
         .btn-delete:hover {
             opacity: 1;
-            background: rgba(239, 68, 68, 0.15);
+            background: rgba(239, 68, 68, 0.1);
         }
 
         /* Realtime Chart Simulation Canvas */
@@ -458,8 +470,8 @@ HTML_TEMPLATE = """
         /* Code Playground Section */
         .code-playground {
             font-family: var(--font-code);
-            background: #050811;
-            border: 1px solid var(--border-color);
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
             border-radius: 14px;
             padding: 1.25rem;
             position: relative;
@@ -472,6 +484,7 @@ HTML_TEMPLATE = """
             margin-bottom: 0.75rem;
             color: var(--text-muted);
             font-size: 0.8rem;
+            font-weight: 500;
         }
 
         .code-dots {
@@ -490,17 +503,18 @@ HTML_TEMPLATE = """
         .dot-green { background: #10b981; }
 
         .code-content {
-            color: #a7f3d0;
+            color: #1e293b;
             font-size: 0.9rem;
-            line-height: 1.5;
+            line-height: 1.55;
             white-space: pre-wrap;
+            font-weight: 500;
         }
 
         /* Quote Banner */
         .quote-box {
             margin-top: 2rem;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1));
-            border: 1px solid rgba(99, 102, 241, 0.25);
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.06), rgba(124, 58, 237, 0.06));
+            border: 1px solid rgba(79, 70, 229, 0.15);
             border-radius: 16px;
             padding: 1.5rem;
             text-align: center;
@@ -510,14 +524,15 @@ HTML_TEMPLATE = """
         .quote-text {
             font-style: italic;
             font-size: 1.1rem;
-            color: #e0e7ff;
+            color: #1e293b;
             margin-bottom: 0.5rem;
+            font-weight: 500;
         }
 
         .quote-author {
             font-size: 0.85rem;
             color: var(--accent-cyan);
-            font-weight: 600;
+            font-weight: 700;
         }
 
         footer {
@@ -545,7 +560,7 @@ HTML_TEMPLATE = """
             </div>
             <div class="server-status">
                 <div class="status-dot"></div>
-                <span>Server: <strong id="server-status-text">Online</strong></span>
+                <span>Server: <strong id="server-status-text" style="color: #0f172a;">Online</strong></span>
             </div>
         </header>
 
@@ -554,7 +569,7 @@ HTML_TEMPLATE = """
             <span class="hero-badge">Single-File Flask Application</span>
             <h1 class="hero-title">Real-Time Developer <br><span class="gradient-text">Innovation Dashboard</span></h1>
             <p class="hero-subtitle">
-                A modern, high-performance web dashboard running entirely from a single <code>app.py</code> script. Designed with glassmorphism aesthetics & interactive APIs.
+                A modern, high-performance web dashboard running entirely from a single <code>app.py</code> script. Designed with clean light-mode aesthetics & interactive APIs.
             </p>
         </section>
 
@@ -663,7 +678,7 @@ if __name__ == "__main__":
                         <div class="card-title">
                             <span class="card-icon">💡</span> Daily Dev Inspiration
                         </div>
-                        <button class="btn" style="padding: 0.35rem 0.75rem; font-size: 0.8rem; background: rgba(255,255,255,0.1);" id="next-quote-btn">New Quote</button>
+                        <button class="btn" style="padding: 0.35rem 0.75rem; font-size: 0.8rem; background: rgba(79, 70, 229, 0.1); color: var(--accent-primary);" id="next-quote-btn">New Quote</button>
                     </div>
                     <div class="quote-box">
                         <div class="quote-text" id="quote-text">"Simplicity is prerequisite for reliability."</div>
@@ -717,7 +732,7 @@ if __name__ == "__main__":
                 li.innerHTML = `
                     <div class="task-info">
                         <span class="badge ${catClass}">${task.category || 'Dev'}</span>
-                        <span style="font-size: 0.95rem; font-weight: 500;">${escapeHtml(task.title)}</span>
+                        <span style="font-size: 0.95rem; font-weight: 600; color: #0f172a;">${escapeHtml(task.title)}</span>
                     </div>
                     <button class="btn-delete" onclick="deleteTask(${task.id})" title="Delete Task">✕</button>
                 `;
@@ -800,7 +815,7 @@ if __name__ == "__main__":
             })[m]);
         }
 
-        // Realtime Canvas Chart Implementation
+        // Realtime Canvas Chart Implementation (Light Theme Colors)
         const canvas = document.getElementById('metricsChart');
         const ctx = canvas.getContext('2d');
         let chartData = [15, 18, 12, 22, 19, 25, 14, 20, 16, 22, 18, 12];
@@ -824,8 +839,8 @@ if __name__ == "__main__":
 
             ctx.clearRect(0, 0, w, h);
 
-            // Draw Background Grid Lines
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+            // Draw Background Grid Lines for Light Theme
+            ctx.strokeStyle = 'rgba(0, 0, 0, 0.06)';
             ctx.lineWidth = 1;
             for (let y = 0; y < h; y += 40) {
                 ctx.beginPath();
@@ -847,10 +862,10 @@ if __name__ == "__main__":
                 else ctx.lineTo(x, y);
             });
 
-            // Gradient Fill
+            // Light Indigo Gradient Fill
             const gradient = ctx.createLinearGradient(0, 0, 0, h);
-            gradient.addColorStop(0, 'rgba(99, 102, 241, 0.4)');
-            gradient.addColorStop(1, 'rgba(99, 102, 241, 0.0)');
+            gradient.addColorStop(0, 'rgba(79, 70, 229, 0.18)');
+            gradient.addColorStop(1, 'rgba(79, 70, 229, 0.0)');
 
             ctx.lineTo(w, h);
             ctx.lineTo(0, h);
@@ -866,7 +881,7 @@ if __name__ == "__main__":
                 if (i === 0) ctx.moveTo(x, y);
                 else ctx.lineTo(x, y);
             });
-            ctx.strokeStyle = '#6366f1';
+            ctx.strokeStyle = '#4f46e5';
             ctx.lineWidth = 3;
             ctx.stroke();
 
@@ -876,7 +891,7 @@ if __name__ == "__main__":
                 const y = h - ((val - minVal) / (maxVal - minVal)) * (h - 40) - 20;
                 ctx.beginPath();
                 ctx.arc(x, y, 4, 0, Math.PI * 2);
-                ctx.fillStyle = '#a855f7';
+                ctx.fillStyle = '#7c3aed';
                 ctx.fill();
             });
         }
