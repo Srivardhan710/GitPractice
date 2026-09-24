@@ -2,3 +2,5 @@
 # sai vardha practicing
 
 #pushing form local to git hub cloud
+
+checking staus 
